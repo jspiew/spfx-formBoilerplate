@@ -9,14 +9,14 @@ import styles from "./DateField.module.scss";
 import { AppContextProvider, IGenericFieldProps, IAppCtxDependentField } from '../../models/index';
 import { getUTC } from '../../utils/index';
 
-export interface IDateTimeFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface IDateTimeFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
   // includeTime?: boolean;
  }
 
 export interface IDateTimeFieldState { }
 
 @observer
-export class GenericDateTimeField<T> extends React.Component<IDateTimeFieldProps<T>, IDateTimeFieldState> {
+export class GenericDateTimeField<T extends object> extends React.Component<IDateTimeFieldProps<T>, IDateTimeFieldState> {
 
   public static HourOptions: IDropdownOption[] = [
     { key: 0, text: "12:00 AM" },

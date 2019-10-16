@@ -9,14 +9,14 @@ import {WebPartContext} from "@microsoft/sp-webpart-base";
 import { IGenericFieldProps, ISpfxCtxDependentField, IManagedMetadataFieldInfo, IAppCtxDependentField } from '../../models/index';
 import { isNullOrEmpty } from '../../utils/index';
 
-export interface IManagedMetadataFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
+export interface IManagedMetadataFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
   multiSelect?: boolean;
 }
 
 export interface IManagedMetadataFieldState { }
 
 @observer
-export class GenericManagedMetadataField<T> extends React.Component<IManagedMetadataFieldProps<T>, IManagedMetadataFieldState> {
+export class GenericManagedMetadataField<T extends object> extends React.Component<IManagedMetadataFieldProps<T>, IManagedMetadataFieldState> {
   constructor(props: IManagedMetadataFieldProps<T>) {
     super(props);
 

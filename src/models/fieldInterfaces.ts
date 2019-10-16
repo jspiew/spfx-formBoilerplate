@@ -1,11 +1,11 @@
 import { AppContextProvider } from "./index";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
-export interface IGenericFieldProps<T> {
+export interface IGenericFieldProps<T extends object> {
   fieldName: keyof T;
 }
 
-export interface IAppCtxDependentField<T> {
+export interface IAppCtxDependentField<T extends object> {
   ctx: AppContextProvider<T>;
 }
 

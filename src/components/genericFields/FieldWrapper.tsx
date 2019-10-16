@@ -4,14 +4,14 @@ import { ErrorLabel } from '../ErrorLabel';
 import {observer} from "mobx-react";
 import { IAppCtxDependentField, IGenericFieldProps } from '../../models/index';
 
-export interface IFieldWrapperProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface IFieldWrapperProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
 
 }
 
 export interface IFieldWrapperState {}
 
 @observer
-export class FieldWrapper<T = any> extends React.Component<IFieldWrapperProps<T>, IFieldWrapperState> {
+export class FieldWrapper<T extends object> extends React.Component<IFieldWrapperProps<T>, IFieldWrapperState> {
   public render(): React.ReactElement<IFieldWrapperProps<T>> {
     return (
       <>

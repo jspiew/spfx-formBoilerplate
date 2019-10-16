@@ -6,14 +6,14 @@ import { AppContextProvider, IGenericFieldProps, IAppCtxDependentField } from '.
 import { BooleanChoiceOptions, boolToString } from '../../utils/index';
 // import styles from './BooleanField.module.scss';
 
-export interface IBooleanFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface IBooleanFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
 
  }
 
 export interface IBooleanFieldState { }
 
 @observer
-export class GenericBooleanField<T> extends React.Component<IBooleanFieldProps<T>, IBooleanFieldState> {
+export class GenericBooleanField<T extends object> extends React.Component<IBooleanFieldProps<T>, IBooleanFieldState> {
   constructor(props: IBooleanFieldProps<T>) {
     super(props);
 

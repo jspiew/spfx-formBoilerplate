@@ -7,13 +7,13 @@ import { FieldWrapper } from '../genericFields/index';
 import { IGenericFieldProps, IAppCtxDependentField } from '../../models/index';
 import { isNullOrEmpty } from '../../utils/index';
 
-export interface INumberFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface INumberFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
  }
 
 export interface INumberFieldState { }
 
 @observer
-export class GenericNumberField<T> extends React.Component<INumberFieldProps<T>, INumberFieldState> {
+export class GenericNumberField<T extends object> extends React.Component<INumberFieldProps<T>, INumberFieldState> {
   constructor(props: INumberFieldProps<T>) {
     super(props);
 

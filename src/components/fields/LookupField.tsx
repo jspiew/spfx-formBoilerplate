@@ -7,14 +7,14 @@ import { ListItemPicker } from '@pnp/spfx-controls-react/lib/listItemPicker';
 import { AppContextProvider, ILookupFieldInfo, ILookupItem, IGenericFieldProps, ISpfxCtxDependentField, IAppCtxDependentField } from '../../models/index';
 import { isNullOrEmpty } from '../../utils/index';
 
-export interface ILookupFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
+export interface ILookupFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
 
 }
 
 export interface ILookupFieldState { }
 
 @observer
-export class GenericLookupField<T> extends React.Component<ILookupFieldProps<T>, ILookupFieldState> {
+export class GenericLookupField<T extends object> extends React.Component<ILookupFieldProps<T>, ILookupFieldState> {
   constructor(props: ILookupFieldProps<T>) {
     super(props);
 

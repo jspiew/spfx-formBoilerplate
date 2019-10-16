@@ -7,7 +7,7 @@ import 'react-quill/dist/quill.snow.css';
 import { FieldWrapper } from '../genericFields/index';
 import { IGenericFieldProps, IAppCtxDependentField } from '../../models/index';
 
-export interface ITextFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface ITextFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
   multiline: boolean;
   richText?: boolean;
  }
@@ -15,7 +15,7 @@ export interface ITextFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDepend
 export interface ITextFieldState { }
 
 @observer
-export class GenericTextField<T> extends React.Component<ITextFieldProps<T>, ITextFieldState> {
+export class GenericTextField<T extends object> extends React.Component<ITextFieldProps<T>, ITextFieldState> {
   constructor(props: ITextFieldProps<T>) {
     super(props);
 

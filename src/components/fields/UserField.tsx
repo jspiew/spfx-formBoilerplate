@@ -7,14 +7,14 @@ import 'react-quill/dist/quill.snow.css';
 import { FieldWrapper } from '../genericFields/index';
 import { IGenericFieldProps, ISpfxCtxDependentField, IAppCtxDependentField } from '../../models/index';
 
-export interface IUserFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
+export interface IUserFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T>, ISpfxCtxDependentField {
   allowMulti: boolean;
  }
 
 export interface IUserFieldState { }
 
 @observer
-export class GenericUserField<T> extends React.Component<IUserFieldProps<T>, IUserFieldState> {
+export class GenericUserField<T extends object> extends React.Component<IUserFieldProps<T>, IUserFieldState> {
   constructor(props: IUserFieldProps<T>) {
     super(props);
 

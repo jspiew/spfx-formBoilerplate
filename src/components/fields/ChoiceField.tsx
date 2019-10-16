@@ -5,7 +5,7 @@ import { FieldWrapper } from "../genericFields/index";
 import { AppContextProvider, IGenericFieldProps, IAppCtxDependentField } from "../../models/index";
 import { getChoiceOptionsFromEnum } from "../../utils/index";
 
-export interface ISingleChoiceFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface ISingleChoiceFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
     choices: any; // have to find a way to put enum here
  }
 
@@ -14,7 +14,7 @@ export interface ISingleChoiceFieldState {
 }
 
 @observer
-export class GenericSingleChoiceField<T> extends React.Component<ISingleChoiceFieldProps<T>, ISingleChoiceFieldState> {
+export class GenericSingleChoiceField<T extends object> extends React.Component<ISingleChoiceFieldProps<T>, ISingleChoiceFieldState> {
   constructor(props: ISingleChoiceFieldProps<T>) {
     super(props);
 

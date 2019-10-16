@@ -6,14 +6,14 @@ import { IGenericFieldProps, IAppCtxDependentField } from '../../models/index';
 import { getChoiceOptionsFromEnum } from '../../utils/index';
 // import styles from './MultiChoiceField.module.scss';
 
-export interface IMultiChoiceFieldProps<T> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
+export interface IMultiChoiceFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
     choices: any;
  }
 
 export interface IMultiChoiceFieldState { }
 
 @observer
-export class GenericMultiChoiceField<T> extends React.Component<IMultiChoiceFieldProps<T>, IMultiChoiceFieldState> {
+export class GenericMultiChoiceField<T extends object> extends React.Component<IMultiChoiceFieldProps<T>, IMultiChoiceFieldState> {
   constructor(props: IMultiChoiceFieldProps<T>) {
     super(props);
 

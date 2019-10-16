@@ -5,7 +5,7 @@ import styles from './Attachments.module.scss';
 import { observer } from "mobx-react";
 import { AppContextProvider } from '../../models/index';
 
-export interface IAttachmentsFieldProps<T> {
+export interface IAttachmentsFieldProps<T extends object> {
   title?: string;
   listUrl: string;
   ctx: AppContextProvider<T>;
@@ -16,7 +16,7 @@ export interface IAttachmentsFieldState {
 }
 
 @observer
-export default class GenericAttachmentsField<T> extends React.Component<IAttachmentsFieldProps<T>, IAttachmentsFieldState> {
+export default class GenericAttachmentsField<T extends object> extends React.Component<IAttachmentsFieldProps<T>, IAttachmentsFieldState> {
   constructor(props: IAttachmentsFieldProps<T>) {
     super(props);
     this._onDrop.bind(this);
@@ -44,37 +44,43 @@ export default class GenericAttachmentsField<T> extends React.Component<IAttachm
         </Dropzone>
         <ul>
           {this.props.ctx.spProps !== null && attachments.map((a) =>
-            <li key={a.name}>
-              <span
-                className={styles.deleteIcon}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(ev) => {
-                  this._removeExistingAttachment(a.name);
-                  ev.bubbles = false;
-                  ev.stopPropagation();
-                  return false;
-                }}
-              >
-                [x]
-              </span>
-              <a target="_blank" href={`${this.props.listUrl}/Attachments/${this.props.ctx.spProps.spItemId}/${a.name}`}>{a.name}</a>
-            </li>)}
+            (
+              <li key={a.name}>
+                <span
+                  className={styles.deleteIcon}
+                  // tslint:disable-next-line: jsx-no-lambda
+                  onClick={(ev) => {
+                    this._removeExistingAttachment(a.name);
+                    ev.bubbles = false;
+                    ev.stopPropagation();
+                    return false;
+                  }}
+                >
+                  [x]
+                </span>
+                <a target="_blank" href={`${this.props.listUrl}/Attachments/${this.props.ctx.spProps.spItemId}/${a.name}`}>{a.name}</a>
+              </li>
+            )
+            )}
           {attachmentsToAdd.map((a) =>
-            <li key={a.name}>
-              <span
-                className={styles.deleteIcon}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(ev) => {
-                  this._removeNewAttachment(a.name);
-                  ev.bubbles = false;
-                  ev.stopPropagation();
-                  return false;
-                }}
-              >
-                [x]
-              </span>
-              {a.name}
-            </li>)}
+            (
+              <li key={a.name}>
+                <span
+                  className={styles.deleteIcon}
+                  // tslint:disable-next-line: jsx-no-lambda
+                  onClick={(ev) => {
+                    this._removeNewAttachment(a.name);
+                    ev.bubbles = false;
+                    ev.stopPropagation();
+                    return false;
+                  }}
+                >
+                  [x]
+                </span>
+                {a.name}
+              </li>
+            )
+          )}
         </ul>
       </div>
     );

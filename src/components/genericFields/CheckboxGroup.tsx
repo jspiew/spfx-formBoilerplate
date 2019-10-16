@@ -25,15 +25,17 @@ export class CheckboxGroup extends React.Component<ICheckboxGroupProps, ICheckbo
     return (
       <div>
           {this.props.options.map((o) =>
-            <Checkbox
-              className={styles.checkbox}
-              key={o.text}
-              label={o.text}
-              onRenderLabel={this._onRenderLabel}
-              checked={this.props.selectedKeys && this.props.selectedKeys.indexOf(o.key) >= 0}
-// tslint:disable-next-line: jsx-no-lambda
-              onChange={(ev,checked) => {this._onChange(ev,checked,o);}}
-            />
+            (
+              <Checkbox
+                className={styles.checkbox}
+                key={o.text}
+                label={o.text}
+                onRenderLabel={this._onRenderLabel}
+                checked={this.props.selectedKeys && this.props.selectedKeys.indexOf(o.key) >= 0}
+  // tslint:disable-next-line: jsx-no-lambda
+                onChange={(ev,checked) => {this._onChange(ev,checked,o);}}
+              />
+            )
           )}
       </div>
     );
