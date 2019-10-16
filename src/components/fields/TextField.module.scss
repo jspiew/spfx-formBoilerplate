@@ -1,0 +1,9 @@
+.richTextEditor {
+  div[class^='ql-editor'] {
+    border-color: rgb(194, 194, 194);
+
+    &:hover {
+      border-color: rgb(51, 51, 51);
+    }
+  }
+}

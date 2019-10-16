@@ -1,0 +1,11 @@
+.mainDiv {
+  max-height: 30px;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px;
+
+  &.expanded {
+    max-height: 100%;
+    transition: 200ms;
+  }
+}

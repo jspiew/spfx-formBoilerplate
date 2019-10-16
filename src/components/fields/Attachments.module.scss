@@ -1,0 +1,22 @@
+.deleteIcon {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.dropzone {
+  height: 50px;
+  border: 1px dashed black;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &.active {
+    background-color: "[theme:themeSecondary, default:#0078d7]";
+    border-color: "[theme:themePrimary, default:#0078d7]";
+  }
+}

@@ -1,0 +1,11 @@
+.datePickerContainer {
+  display: flex;
+
+  .datePicker {
+    flex: 1 1 auto;
+  }
+
+  .timePicker {
+    flex: 0 1 auto;
+  }
+}

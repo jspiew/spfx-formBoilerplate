@@ -1,0 +1,13 @@
+.errorLabel {
+  color: darkgreen;
+  cursor: default;
+  opacity: 0;
+  margin-bottom: 10px;
+
+  &.visible {
+    color: darkred;
+    opacity: 1;
+    font-weight: bolder;
+    transition: opacity 200ms;
+  }
+}

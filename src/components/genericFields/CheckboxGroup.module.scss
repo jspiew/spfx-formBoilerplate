@@ -1,0 +1,5 @@
+.checkbox {
+  &:not(:last-child) {
+    margin-bottom: 3px;
+  }
+}

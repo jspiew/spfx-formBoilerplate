@@ -1,7 +1,13 @@
 {
-  "extends": "@microsoft/sp-tslint-rules/base-tslint.json",
+  "extends": [
+    "@microsoft/sp-tslint-rules/base-tslint.json",
+    "tslint:recommended",
+    "tslint-react"
+  ],
   "rules": {
     "class-name": false,
+    "jsx-no-multiline-js": false,
+    "quotemark": false,
     "export-name": false,
     "forin": false,
     "label-position": false,
@@ -25,6 +31,12 @@
     "typedef-whitespace": false,
     "use-named-parameter": true,
     "variable-name": false,
-    "whitespace": false
+    "whitespace": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-trailing-whitespace": false,
+    "max-line-length": false,
+    "no-empty-interface": false,
+    "eofline": false
   }
 }
