@@ -1,0 +1,35 @@
+{
+  "@pnp/generator-spfx": {
+    "framework": "react",
+    "pnpFramework": "reactjs.plus",
+    "pnp-libraries": [
+      "@pnp/pnpjs",
+      "@pnp/spfx-controls-react",
+      "ouifr@6fluent",
+      "rush@3.5"
+    ],
+    "pnp-ci": [
+      "azure"
+    ],
+    "pnp-vetting": [
+      "webpack-analyzer",
+      "stylelint",
+      "csscomb"
+    ],
+    "spfxenv": "spo",
+    "pnp-testing": [
+      "jest"
+    ]
+  },
+  "@microsoft/generator-sharepoint": {
+    "environment": "spo",
+    "framework": "react",
+    "isCreatingSolution": true,
+    "version": "1.9.1",
+    "libraryName": "spfx-form-boilerplate",
+    "libraryId": "47cf2185-fe26-4c69-b0f2-369e88208636",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
