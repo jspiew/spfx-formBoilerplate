@@ -4,24 +4,38 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  IWebPartPropertiesMetadata
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'HelloFormWebPartStrings';
 import HelloForm from './components/HelloForm';
 import { IHelloFormProps } from './components/IHelloFormProps';
+import { DynamicProperty } from '@microsoft/sp-component-base';
+import ctx from "./modelImplenetation/AppContextProvider";
+import { genericListItemSvc } from './modelImplenetation/listConfig';
+import { sp } from '@pnp/sp';
 
 export interface IHelloFormWebPartProps {
-  description: string;
+  selectedItemId: DynamicProperty<number>;
 }
 
 export default class HelloFormWebPart extends BaseClientSideWebPart<IHelloFormWebPartProps> {
+
+  public async onInit() {
+    sp.setup({
+      spfxContext: this.context
+    });
+    const initResult = await genericListItemSvc.Init();
+    ctx.fieldInfo = initResult.fieldInfo;
+  }
 
   public render(): void {
     const element: React.ReactElement<IHelloFormProps > = React.createElement(
       HelloForm,
       {
-        description: this.properties.description
+        selectedItemId: this.properties.selectedItemId.tryGetValue(),
+        context: this.context
       }
     );
 
@@ -34,6 +48,16 @@ export default class HelloFormWebPart extends BaseClientSideWebPart<IHelloFormWe
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');
+  }
+
+  protected get propertiesMetadata(): IWebPartPropertiesMetadata {
+    return {
+      // Specify the web part properties data type to allow the address
+      // information to be serialized by the SharePoint Framework.
+      selectedItemId: {
+        dynamicPropertyType: 'number'
+      }
+    };
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {

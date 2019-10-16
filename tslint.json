@@ -37,6 +37,7 @@
     "no-trailing-whitespace": false,
     "max-line-length": false,
     "no-empty-interface": false,
-    "eofline": false
+    "eofline": false,
+    "jsx-wrap-multiline": false
   }
 }
