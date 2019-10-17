@@ -31,10 +31,18 @@ export default class HelloFormWebPart extends BaseClientSideWebPart<IHelloFormWe
   }
 
   public render(): void {
+    let id: number;
+
+    if (window.location.search.indexOf('id=') >= 0) {
+      id = parseInt(window.location.search.substr(window.location.search.indexOf('id=') + 3), 10);
+    } else {
+      id = this.properties.selectedItemId.tryGetValue();
+    }
+
     const element: React.ReactElement<IHelloFormProps > = React.createElement(
       HelloForm,
       {
-        selectedItemId: this.properties.selectedItemId.tryGetValue(),
+        selectedItemId: id,
         context: this.context
       }
     );

@@ -34,16 +34,8 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
   }
 
   public componentDidMount() {
-    let id: number;
-    // so yeah, this whole query string logic should be moved to parent component (in this case the webpart root file). Mea culpa
-    if (window.location.search.indexOf('id=') >= 0) {
-      id = parseInt(window.location.search.substr(window.location.search.indexOf('id=') + 3), 10);
-    } else if (this.props.selectedItemId >= 0) {
-      id = this.props.selectedItemId;
-    }
-
-    if (id) {
-      genericListItemSvc.getItem(id).then((v) => {
+    if (this.props.selectedItemId) {
+      genericListItemSvc.getItem(this.props.selectedItemId).then((v) => {
         ctx.updateModel(v.item);
         ctx.spProps = v.spProps;
         ctx.attachments = v.spProps.attachments.map((a) => ({ name: a, content: null }));

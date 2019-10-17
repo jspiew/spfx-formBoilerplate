@@ -3,6 +3,7 @@ import {AppContextProvider} from "../models";
 import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
 import JSONTree from 'react-json-tree';
+import styles from "./DebugPanel.module.scss";
 
 export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
   const [visible, setVisibility] = React.useState(false);
@@ -23,10 +24,12 @@ export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
         onDismissed={hide}
         isBlocking={false}
       >
-        <h2>Model values</h2>
-        <JSONTree data={props.ctx.model} />
-        <h2>Validation result</h2>
-        <JSONTree data={props.ctx.validationResult} />
+        <div className={styles.dbgPanelBody}>
+          <h2>Model values</h2>
+          <JSONTree data={props.ctx.model} />
+          <h2>Validation result</h2>
+          <JSONTree data={props.ctx.validationResult} />
+        </div>
       </Panel>
     </>
   );
