@@ -8,9 +8,9 @@ import { genericListItemSvc } from '../modelImplenetation/listConfig';
 import { Shimmer, Spinner, SpinnerSize, Separator, DefaultButton, Panel, PanelType, autobind, IButtonProps } from 'office-ui-fabric-react';
 import * as Fields from "../modelImplenetation/Fields";
 import ctx from "../modelImplenetation/AppContextProvider";
-import Devtools from "mobx-react-devtools";
 import { SimpleChoice } from '../../../models';
 import { ValidationSummary } from '../modelImplenetation/HelperComponents';
+import { DebugPanel } from '../../../components';
 
 type FormState = "editing" | "saving" | "success" | "error" | "showValidation";
 
@@ -108,7 +108,6 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
     return (
       <div className={styles.helloFormContainer}>
         {!ctx.spProps && <h2>New submission</h2>}
-        {isDbg && <Devtools position="topRight" />}
         <Fields.TextField ctx={ctx} fieldName="textColumn" multiline={false} />
         <Separator />
         <Fields.TextField ctx={ctx} fieldName="multiTextColumn" multiline={true} richText={true} />
@@ -145,29 +144,7 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
           onRenderText={this._onTextRender}
         />
 
-        {isDbg && <DefaultButton text="Dbg" onClick={this._showDebugPanel} style={{ position: "fixed", right: "15px", bottom: "15px" }} />}
-        {(isDbg) &&
-          (
-            <Panel
-              type={PanelType.medium}
-              isOpen={this.state.showDebugPanel}
-              onDismissed={this._hideDebugPanel}
-              isBlocking={false}
-            >
-              {JSON.stringify(this.props.selectedItemId)}
-              <pre>
-                <code>
-                  {JSON.stringify(ctx.model, null, 4)}
-                </code>
-              </pre>
-              <pre>
-                <code>
-                  {JSON.stringify(ctx.validationResult, null, 4)}
-                </code>
-              </pre>
-            </Panel>
-          )
-        }
+        {isDbg && <DebugPanel ctx={ctx} />}
       </div>
     );
   }
@@ -231,17 +208,5 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
         };
       });
     }
-  }
-
-  private _showDebugPanel = () => {
-    this.setState({
-      showDebugPanel: true
-    });
-  }
-
-  private _hideDebugPanel = () => {
-    this.setState({
-      showDebugPanel: false
-    });
   }
 }
