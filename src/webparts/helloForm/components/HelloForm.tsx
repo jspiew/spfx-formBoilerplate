@@ -91,7 +91,7 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
     let text = '';
     let className = '';
     switch (this.state.formState) {
-      case "editing": text = "Submit"; className = undefined; break;
+      case "editing": text = ctx.spProps ? "Submit" : "Update"; className = undefined; break;
       case "error": text = "Error"; className = styles.buttonError; break;
       case "saving": text = "Saving"; className = undefined; break;
       case "success": text = "Success"; className = styles.buttonSuccess; break;
