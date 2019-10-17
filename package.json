@@ -39,7 +39,8 @@
     "office-ui-fabric-react": "^6.182.0",
     "react": "16.8.5",
     "react-dom": "16.8.5",
-    "react-dropzone": "6.2.4"
+    "react-dropzone": "6.2.4",
+    "react-json-view": "^1.19.1"
   },
   "resolutions": {
     "@types/react": "16.8.8"

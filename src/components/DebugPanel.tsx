@@ -2,6 +2,7 @@ import * as React from "react";
 import {AppContextProvider} from "../models";
 import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
+import ReactJson from 'react-json-view';
 
 export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
   const [visible, setVisibility] = React.useState(false);
@@ -22,16 +23,10 @@ export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
         onDismissed={hide}
         isBlocking={false}
       >
-        <pre>
-          <code>
-            {JSON.stringify(props.ctx.model, null, 4)}
-          </code>
-        </pre>
-        <pre>
-          <code>
-            {JSON.stringify(props.ctx.validationResult, null, 4)}
-          </code>
-        </pre>
+        <h2>Model values</h2>
+        <ReactJson src={props.ctx.model} />
+        <h2>Validation result</h2>
+        <ReactJson src={props.ctx.validationResult} />
       </Panel>
     </>
   );
