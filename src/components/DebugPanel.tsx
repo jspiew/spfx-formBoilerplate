@@ -2,7 +2,7 @@ import * as React from "react";
 import {AppContextProvider} from "../models";
 import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
-import ReactJson from 'react-json-view';
+import JSONTree from 'react-json-tree';
 
 export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
   const [visible, setVisibility] = React.useState(false);
@@ -24,9 +24,9 @@ export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
         isBlocking={false}
       >
         <h2>Model values</h2>
-        <ReactJson src={props.ctx.model} />
+        <JSONTree data={props.ctx.model} />
         <h2>Validation result</h2>
-        <ReactJson src={props.ctx.validationResult} />
+        <JSONTree data={props.ctx.validationResult} />
       </Panel>
     </>
   );
