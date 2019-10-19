@@ -4,8 +4,9 @@ import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
 import JSONTree from 'react-json-tree';
 import styles from "./DebugPanel.module.scss";
+import {observer} from "mobx-react";
 
-export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
+export const DebugPanel = observer((props:{ctx: AppContextProvider<any>}) => {
   const [visible, setVisibility] = React.useState(false);
   const show = () => {setVisibility(true);};
   const hide = () => {setVisibility(false);};
@@ -33,4 +34,4 @@ export function DebugPanel(props:{ctx: AppContextProvider<any>}) {
       </Panel>
     </>
   );
-}
+});
