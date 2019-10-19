@@ -1,35 +1,64 @@
 import * as React from "react";
-import {AppContextProvider} from "../models";
+import {AppContextProvider, IAppCtxDependentField} from "../models";
+import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
 import JSONTree from 'react-json-tree';
 import styles from "./DebugPanel.module.scss";
 import {observer} from "mobx-react";
 
-export const DebugPanel = observer((props:{ctx: AppContextProvider<any>}) => {
-  const [visible, setVisibility] = React.useState(false);
-  const show = () => {setVisibility(true);};
-  const hide = () => {setVisibility(false);};
+interface IDebugPanelProps<T extends object = any> extends IAppCtxDependentField<T> {
 
-  return (
-    <>
+}
+
+interface IDebugPanelState {
+  visible: boolean;
+}
+
+@observer
+export class DebugPanel<T extends object> extends React.Component<IDebugPanelProps<T>,IDebugPanelState> {
+
+  constructor(props: IDebugPanelProps<T>) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
+
+  public render() : React.ReactElement<IDebugPanelProps<T>> {
+    return (
+    <div>
       <DefaultButton
         text="Dbg"
-        onClick={show}
+        onClick={this.show}
         style={{ position: "fixed", right: "15px", bottom: "15px", }}
-      />}
+      />
+      {this.props.ctx.modelValid}
       <Panel
         type={PanelType.medium}
-        isOpen={visible}
-        onDismissed={hide}
+        isOpen={this.state.visible}
+        onDismissed={this.hide}
         isBlocking={false}
       >
         <div className={styles.dbgPanelBody}>
           <h2>Model values</h2>
-          <JSONTree data={props.ctx.model} />
+          <JSONTree data={this.props.ctx.model} />
           <h2>Validation result</h2>
-          <JSONTree data={props.ctx.validationResult} />
+          <JSONTree data={this.props.ctx.validationResult} />
         </div>
       </Panel>
-    </>
-  );
-});
+    </div>
+    );
+  }
+
+  private show = () => {
+    this.setState({
+      visible: true
+    });
+  }
+
+  private hide = () => {
+    this.setState({
+      visible: false
+    });
+  }
+}
