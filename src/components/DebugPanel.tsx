@@ -1,6 +1,5 @@
 import * as React from "react";
 import {AppContextProvider, IAppCtxDependentField} from "../models";
-import DevTools from "mobx-react-devtools";
 import { DefaultButton, Panel, PanelType } from "office-ui-fabric-react";
 import JSONTree from 'react-json-tree';
 import styles from "./DebugPanel.module.scss";
