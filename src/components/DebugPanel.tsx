@@ -5,40 +5,26 @@ import JSONTree from 'react-json-tree';
 import styles from "./DebugPanel.module.scss";
 import {observer, Observer} from "mobx-react";
 
-interface IDebugPanelProps<T extends object> extends IAppCtxDependentField<T> {
+export const DebugPanel = observer((props: { ctx: AppContextProvider<any> }) => {
+  const [visible, setVisibility] = React.useState(false);
+  const show = () => { setVisibility(true); };
+  const hide = () => { setVisibility(false); };
 
-}
+  // the below is to force JSONTree rerender
+  const changedModel = {...props.ctx.model};
+  const changedValidation = { ...props.ctx.validationResult };
 
-interface IDebugPanelState {
-  visible: boolean;
-}
-
-@observer
-export class DebugPanel<T extends object> extends React.Component<IDebugPanelProps<T>,IDebugPanelState> {
-
-  constructor(props: IDebugPanelProps<T>) {
-    super(props);
-    this.state = {
-      visible: false
-    };
-  }
-
-  public render() : React.ReactElement<IDebugPanelProps<T>> {
-    // that's a nasty workaround to JSONtree not rerendering with ctx changes.
-    const changedModel = {...this.props.ctx.model};
-    const changedValidation = { ...this.props.ctx.validationResult };
-
-    return (
+  return (
     <>
       <DefaultButton
-        text="Debug"
-        onClick={this.show}
+        text="Dbg"
+        onClick={show}
         style={{ position: "fixed", right: "15px", bottom: "15px", }}
-      />
+      />}
       <Panel
         type={PanelType.medium}
-        isOpen={this.state.visible}
-        onDismissed={this.hide}
+        isOpen={visible}
+        onDismissed={hide}
         isBlocking={false}
       >
         <div className={styles.dbgPanelBody}>
@@ -49,18 +35,5 @@ export class DebugPanel<T extends object> extends React.Component<IDebugPanelPro
         </div>
       </Panel>
     </>
-    );
-  }
-
-  private show = () => {
-    this.setState({
-      visible: true
-    });
-  }
-
-  private hide = () => {
-    this.setState({
-      visible: false
-    });
-  }
-}
+  );
+});
