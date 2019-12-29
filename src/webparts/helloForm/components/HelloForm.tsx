@@ -8,7 +8,6 @@ import { genericListItemSvc } from '../modelImplenetation/listConfig';
 import { Shimmer, Spinner, SpinnerSize, Separator, DefaultButton, Panel, PanelType, autobind, IButtonProps } from 'office-ui-fabric-react';
 import * as Fields from "../modelImplenetation/Fields";
 import ctx from "../modelImplenetation/AppContextProvider";
-import { SimpleChoice } from '../../../models';
 import { ValidationSummary } from '../modelImplenetation/HelperComponents';
 import { DebugPanel } from '../../../components';
 
@@ -104,9 +103,9 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
         <Separator />
         <Fields.TextField ctx={ctx} fieldName="multiTextColumn" multiline={true} richText={true} />
         <Separator />
-        <Fields.SingleChoiceField ctx={ctx} fieldName="singleChoiceColumn" choices={SimpleChoice} />
+        <Fields.ChoiceField ctx={ctx} fieldName="singleChoiceColumn" />
         <Separator />
-        <Fields.MultiChoiceField ctx={ctx} fieldName="multiChoiceColumn" choices={SimpleChoice} />
+        <Fields.ChoiceField ctx={ctx} fieldName="multiChoiceColumn" />
         <Separator />
         <Fields.BooleanField ctx={ctx} fieldName="booleanColumn" />
         <Separator />

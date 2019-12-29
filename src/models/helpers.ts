@@ -65,6 +65,10 @@ export interface ILookupFieldInfo extends ISpFieldInfo {
   "LookupField": string;
 }
 
+export interface IChoiceFieldInfo extends ISpFieldInfo {
+  "Choices" : string[];
+}
+
 export interface IUserFieldInfo extends ISpFieldInfo {
   "AllowMultipleValues": boolean;
 }

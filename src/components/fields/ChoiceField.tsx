@@ -1,21 +1,20 @@
 import * as React from "react";
 import { ChoiceGroup, IChoiceGroupOption } from "office-ui-fabric-react";
 import {observer} from "mobx-react";
-import { FieldWrapper } from "../genericFields/index";
-import { AppContextProvider, IGenericFieldProps, IAppCtxDependentField } from "../../models/index";
+import { FieldWrapper, CheckboxGroup } from "../genericFields/index";
+import { AppContextProvider, IGenericFieldProps, IAppCtxDependentField, IChoiceFieldInfo } from "../../models/index";
 import { getChoiceOptionsFromEnum } from "../../utils/index";
 
-export interface ISingleChoiceFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
-    choices: any; // have to find a way to put enum here
+export interface IChoiceFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
  }
 
-export interface ISingleChoiceFieldState {
+export interface IChoiceFieldState {
 
 }
 
 @observer
-export class GenericSingleChoiceField<T extends object> extends React.Component<ISingleChoiceFieldProps<T>, ISingleChoiceFieldState> {
-  constructor(props: ISingleChoiceFieldProps<T>) {
+export class GenericChoiceField<T extends object> extends React.Component<IChoiceFieldProps<T>, IChoiceFieldState> {
+  constructor(props: IChoiceFieldProps<T>) {
     super(props);
 
     this.state = {
@@ -23,13 +22,33 @@ export class GenericSingleChoiceField<T extends object> extends React.Component<
     };
   }
 
-  public render(): React.ReactElement<ISingleChoiceFieldProps<T>> {
+  private get _fieldInfo() {
+    return this.props.ctx.fieldInfo[this.props.fieldName] as IChoiceFieldInfo;
+  }
+
+  public render(): React.ReactElement<IChoiceFieldProps<T>> {
+    return this._fieldInfo.TypeAsString === "MultiChoice" ? this.renderMulti() : this.renderSingle();
+  }
+
+  public renderSingle(): React.ReactElement<IChoiceFieldProps<T>> {
     return (
       <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
         <ChoiceGroup
-          options={getChoiceOptionsFromEnum(this.props.choices)}
+          options={this._fieldInfo.Choices.map<IChoiceGroupOption>((c) =>({key: c, text: c}))}
           selectedKey={this.props.ctx.model[this.props.fieldName as any] as string}
           onChange={this._onChange}
+        />
+      </FieldWrapper>
+    );
+  }
+
+  public renderMulti(): React.ReactElement<IChoiceFieldProps<T>> {
+    return (
+      <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
+        <CheckboxGroup
+          options={this._fieldInfo.Choices.map<IChoiceGroupOption>((c) => ({ key: c, text: c }))}
+          onChanged={this._onMultiChanged}
+          selectedKeys={this.props.ctx.model[this.props.fieldName as any] as []}
         />
       </FieldWrapper>
     );
@@ -38,6 +57,12 @@ export class GenericSingleChoiceField<T extends object> extends React.Component<
   private _onChange = (ev:React.FormEvent<HTMLInputElement>, option:IChoiceGroupOption) => {
     const newModelValue: Partial<T> = {};
     newModelValue[this.props.fieldName as any] = option.key;
+    this.props.ctx.updateModel(newModelValue);
+  }
+
+  private _onMultiChanged = (newValues: string[]) => {
+    const newModelValue = {};
+    newModelValue[this.props.fieldName as any] = newValues;
     this.props.ctx.updateModel(newModelValue);
   }
 

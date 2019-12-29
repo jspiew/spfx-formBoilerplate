@@ -1,11 +1,9 @@
-import { GenericTextField, GenericSingleChoiceField, GenericMultiChoiceField, GenericBooleanField, GenericNumberField, GenericDateTimeField, GenericManagedMetadataField, GenericUserField, GenericLookupField } from "../../../components/index";
+import { GenericTextField, GenericChoiceField, GenericBooleanField, GenericNumberField, GenericDateTimeField, GenericManagedMetadataField, GenericUserField, GenericLookupField } from "../../../components/index";
 import { IListItemModel } from "./itemModels";
 
 export class TextField extends GenericTextField<IListItemModel> {}
 // tslint:disable-next-line: max-classes-per-file
-export class SingleChoiceField extends GenericSingleChoiceField<IListItemModel> {}
-// tslint:disable-next-line: max-classes-per-file
-export class MultiChoiceField extends GenericMultiChoiceField<IListItemModel> {}
+export class ChoiceField extends GenericChoiceField<IListItemModel> {}
 // tslint:disable-next-line: max-classes-per-file
 export class BooleanField extends GenericBooleanField<IListItemModel> {}
 // tslint:disable-next-line: max-classes-per-file

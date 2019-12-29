@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DateTimePicker, DateConvention, TimeConvention } from '@pnp/spfx-controls-react/lib/dateTimePicker';
+import { DateTimePicker, DateConvention, TimeConvention } from '@pnp/spfx-controls-react';
 import { observer } from "mobx-react";
 import 'react-quill/dist/quill.snow.css';
 import { FieldWrapper } from '../genericFields/index';

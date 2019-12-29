@@ -85,7 +85,7 @@ export class SpSvc<T> {
   }
 
   public async Init() {
-    const info = await sp.web.lists.getByTitle(this._listTitle).fields.select("Title", "StaticName", "Description", "TypeAsString", "TermSetId", "EntityPropertyName", "AllowMultipleValues", "LookupList", "LookupField").filter('FromBaseType ne true').get<ISpFieldInfo[]>();
+    const info = await sp.web.lists.getByTitle(this._listTitle).fields.select("Title", "StaticName", "Description", "TypeAsString", "TermSetId", "EntityPropertyName", "AllowMultipleValues", "LookupList", "LookupField", "Choices").filter('FromBaseType ne true').get<ISpFieldInfo[]>();
 
     const timezone = await sp.web.regionalSettings.timeZone.get<{Description: string}>();
 

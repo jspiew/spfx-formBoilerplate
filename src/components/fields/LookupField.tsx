@@ -2,7 +2,7 @@ import * as React from 'react';
 // import styles from './TextField.module.scss';
 import { observer } from "mobx-react";
 import { FieldWrapper } from '../genericFields/index';
-import { ListItemPicker } from '@pnp/spfx-controls-react/lib/listItemPicker';
+import { ListItemPicker } from '@pnp/spfx-controls-react';
 
 import { AppContextProvider, ILookupFieldInfo, ILookupItem, IGenericFieldProps, ISpfxCtxDependentField, IAppCtxDependentField } from '../../models/index';
 import { isNullOrEmpty } from '../../utils/index';

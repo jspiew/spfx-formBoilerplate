@@ -6,7 +6,6 @@ export * from './DateField.module.scss';
 export * from './DateField';
 export * from './LookupField';
 export * from './ManagedMetadataField';
-export * from './MultiChoiceField';
 export * from './NumberField';
 export * from './TextField.module.scss';
 export * from './TextField';
