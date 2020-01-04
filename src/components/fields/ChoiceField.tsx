@@ -14,16 +14,19 @@ export interface IChoiceFieldState {
 
 @observer
 export class GenericChoiceField<T extends object> extends React.Component<IChoiceFieldProps<T>, IChoiceFieldState> {
+
+  private get _fieldInfo() {
+    return this.props.ctx.fieldInfo[this.props.fieldName] as IChoiceFieldInfo;
+  }
+
+  private _choices = this._fieldInfo.Choices.map<IChoiceGroupOption>((c) => ({ key: c, text: c }));
+
   constructor(props: IChoiceFieldProps<T>) {
     super(props);
 
     this.state = {
 
     };
-  }
-
-  private get _fieldInfo() {
-    return this.props.ctx.fieldInfo[this.props.fieldName] as IChoiceFieldInfo;
   }
 
   public render(): React.ReactElement<IChoiceFieldProps<T>> {
@@ -34,7 +37,7 @@ export class GenericChoiceField<T extends object> extends React.Component<IChoic
     return (
       <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
         <ChoiceGroup
-          options={this._fieldInfo.Choices.map<IChoiceGroupOption>((c) =>({key: c, text: c}))}
+          options={this._choices}
           selectedKey={this.props.ctx.model[this.props.fieldName as any] as string}
           onChange={this._onChange}
         />
@@ -46,7 +49,7 @@ export class GenericChoiceField<T extends object> extends React.Component<IChoic
     return (
       <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
         <CheckboxGroup
-          options={this._fieldInfo.Choices.map<IChoiceGroupOption>((c) => ({ key: c, text: c }))}
+          options={this._choices}
           onChanged={this._onMultiChanged}
           selectedKeys={this.props.ctx.model[this.props.fieldName as any] as []}
         />

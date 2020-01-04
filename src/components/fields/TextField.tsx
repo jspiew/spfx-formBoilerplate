@@ -5,17 +5,19 @@ import { observer } from "mobx-react";
 import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
 import 'react-quill/dist/quill.snow.css';
 import { FieldWrapper } from '../genericFields/index';
-import { IGenericFieldProps, IAppCtxDependentField } from '../../models/index';
+import { IGenericFieldProps, IAppCtxDependentField, ISpFieldInfo } from '../../models/index';
 
 export interface ITextFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
-  multiline: boolean;
-  richText?: boolean;
  }
 
 export interface ITextFieldState { }
 
 @observer
 export class GenericTextField<T extends object> extends React.Component<ITextFieldProps<T>, ITextFieldState> {
+  private get _fieldInfo() {
+    return this.props.ctx.fieldInfo[this.props.fieldName] as ISpFieldInfo;
+  }
+
   constructor(props: ITextFieldProps<T>) {
     super(props);
 
@@ -27,12 +29,12 @@ export class GenericTextField<T extends object> extends React.Component<ITextFie
   public render(): React.ReactElement<ITextFieldProps<T>> {
     return (
       <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
-         {this.props.multiline && this.props.richText ? this._renderQuill() : this._renderFabric()}
+        {this._fieldInfo.TypeAsString === "Note" ? this._renderMulti() : this._renderFabric()}
       </FieldWrapper>
     );
   }
 
-  private _renderQuill(): React.ReactElement<ITextFieldProps<T>> {
+  private _renderMulti(): React.ReactElement<ITextFieldProps<T>> {
     return (
       <RichText
         value={this.props.ctx.model[this.props.fieldName] as unknown as string}
@@ -46,7 +48,7 @@ export class GenericTextField<T extends object> extends React.Component<ITextFie
     return (
       <FabricTextField
         value={this.props.ctx.model[this.props.fieldName] as unknown as string}
-        multiline={this.props.multiline}
+        multiline={this._fieldInfo.TypeAsString==="Note"}
         rows={6} // only works if multiline is set
         onChange={this._onChange}
       />

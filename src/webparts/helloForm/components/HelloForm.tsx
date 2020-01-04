@@ -99,9 +99,9 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
     return (
       <div className={styles.helloFormContainer}>
         {!ctx.spProps && <h2>New submission</h2>}
-        <Fields.TextField ctx={ctx} fieldName="textColumn" multiline={false} />
+        <Fields.TextField ctx={ctx} fieldName="textColumn" />
         <Separator />
-        <Fields.TextField ctx={ctx} fieldName="multiTextColumn" multiline={true} richText={true} />
+        <Fields.TextField ctx={ctx} fieldName="multiTextColumn" />
         <Separator />
         <Fields.ChoiceField ctx={ctx} fieldName="singleChoiceColumn" />
         <Separator />
@@ -115,11 +115,11 @@ export default class HelloForm extends React.Component<IHelloFormProps, IListIte
         <Separator />
         <Fields.ManagedMetadataField ctx={ctx} fieldName="managedMetadata" spfxContext={this.props.context} />
         <Separator />
-        <Fields.ManagedMetadataField ctx={ctx} fieldName="managedMetadataMulti" multiSelect={true} spfxContext={this.props.context} />
+        <Fields.ManagedMetadataField ctx={ctx} fieldName="managedMetadataMulti" spfxContext={this.props.context} />
         <Separator />
-        <Fields.UserField ctx={ctx} fieldName="userField" allowMulti={false} spfxContext={this.props.context} />
+        <Fields.UserField ctx={ctx} fieldName="userField" spfxContext={this.props.context} />
         <Separator />
-        <Fields.UserField ctx={ctx} fieldName="userFieldMulti" allowMulti={true} spfxContext={this.props.context} />
+        <Fields.UserField ctx={ctx} fieldName="userFieldMulti" spfxContext={this.props.context} />
         <Separator />
         <Fields.LookupField ctx={ctx} fieldName="lookupColumn" spfxContext={this.props.context} />
         <Separator />
