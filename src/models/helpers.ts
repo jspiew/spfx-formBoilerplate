@@ -59,6 +59,11 @@ export interface IManagedMetadataFieldInfo extends ISpFieldInfo {
   "AllowMultipleValues": boolean;
 }
 
+export interface ITextFieldInfo extends ISpFieldInfo {
+  "NumberOfLines": number;
+  "RichText" :boolean;
+}
+
 export interface ILookupFieldInfo extends ISpFieldInfo {
   "AllowMultipleValues": boolean;
   "LookupList": string;

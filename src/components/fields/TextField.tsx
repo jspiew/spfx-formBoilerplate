@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
 import 'react-quill/dist/quill.snow.css';
 import { FieldWrapper } from '../genericFields/index';
-import { IGenericFieldProps, IAppCtxDependentField, ISpFieldInfo } from '../../models/index';
+import { IGenericFieldProps, IAppCtxDependentField, ISpFieldInfo, ITextFieldInfo } from '../../models/index';
 
 export interface ITextFieldProps<T extends object> extends IGenericFieldProps<T>, IAppCtxDependentField<T> {
  }
@@ -15,7 +15,7 @@ export interface ITextFieldState { }
 @observer
 export class GenericTextField<T extends object> extends React.Component<ITextFieldProps<T>, ITextFieldState> {
   private get _fieldInfo() {
-    return this.props.ctx.fieldInfo[this.props.fieldName] as ISpFieldInfo;
+    return this.props.ctx.fieldInfo[this.props.fieldName] as ITextFieldInfo;
   }
 
   constructor(props: ITextFieldProps<T>) {
@@ -29,12 +29,12 @@ export class GenericTextField<T extends object> extends React.Component<ITextFie
   public render(): React.ReactElement<ITextFieldProps<T>> {
     return (
       <FieldWrapper ctx={this.props.ctx} fieldName={this.props.fieldName}>
-        {this._fieldInfo.TypeAsString === "Note" ? this._renderMulti() : this._renderFabric()}
+        {this._fieldInfo.TypeAsString === "Note" && this._fieldInfo.RichText ? this._renderRichText() : this._renderFabric()}
       </FieldWrapper>
     );
   }
 
-  private _renderMulti(): React.ReactElement<ITextFieldProps<T>> {
+  private _renderRichText(): React.ReactElement<ITextFieldProps<T>> {
     return (
       <RichText
         value={this.props.ctx.model[this.props.fieldName] as unknown as string}
@@ -49,7 +49,7 @@ export class GenericTextField<T extends object> extends React.Component<ITextFie
       <FabricTextField
         value={this.props.ctx.model[this.props.fieldName] as unknown as string}
         multiline={this._fieldInfo.TypeAsString==="Note"}
-        rows={6} // only works if multiline is set
+        rows={this._fieldInfo.NumberOfLines} // only works if multiline is set
         onChange={this._onChange}
       />
     );
