@@ -1,4 +1,3 @@
-import { SimpleChoice, IUser} from "../../../models/index";
 import {IPersonaProps} from "office-ui-fabric-react";
 import { ILookupItem } from "../../../models/helpers";
 import { IPickerTerms, IPickerTerm } from "@pnp/spfx-controls-react/lib/TaxonomyPicker";
@@ -6,8 +5,8 @@ import { IPickerTerms, IPickerTerm } from "@pnp/spfx-controls-react/lib/Taxonomy
 export interface IListItemModel {
     textColumn: string;
     multiTextColumn: string;
-    singleChoiceColumn: SimpleChoice;
-    multiChoiceColumn: SimpleChoice[];
+    singleChoiceColumn: string;
+    multiChoiceColumn: string[];
     booleanColumn: boolean;
     numberColumn: number;
     managedMetadata: IPickerTerm;

@@ -39,7 +39,6 @@ export class GenericManagedMetadataField<T extends object> extends React.Compone
           initialValues={this._initialValues()}
           onChange={this._onChange}
           isTermSetSelectable={false}
-
         />
       </FieldWrapper>
     );
