@@ -1,6 +1,9 @@
 {
     "preset": "@voitanos/jest-preset-spfx-react16",
     "rootDir": "../src",
+    "testPathIgnorePatterns": [
+        "ControlStrings.*"
+    ],
     "coverageReporters": [
         "text",
         "json",
