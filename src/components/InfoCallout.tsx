@@ -56,7 +56,7 @@ export default class InfoCallout extends React.Component<IInfoCalloutProps, IInf
   }
 
   private _onMouseLeave = () => {
-    this._delayedCalloutId = setTimeout(this.hideCallout, 300);
+    this._delayedCalloutId = window.setTimeout(this.hideCallout, 300);
   }
 
   private hideCallout = () => {
